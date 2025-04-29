@@ -5,7 +5,6 @@ import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.AeropuertoRespons
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.VueloResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -22,7 +21,7 @@ public class VueloServicioImplementacion implements VueloServicio{
     @Value("${vuelos.client_secret}")
     private String client_secret;
 
-    private WebClient webClient;
+    private final WebClient webClient;
 
     public VueloServicioImplementacion(WebClient.Builder builder){
         webClient=builder.baseUrl("https://test.api.amadeus.com").build();
@@ -52,12 +51,27 @@ public class VueloServicioImplementacion implements VueloServicio{
 
     @Override
     public List<AeropuertoResponse> buscarAeropuertos(String nombreCiudad) {
-        AeropuertoResponse aeropuertoResponse=new AeropuertoResponse();
-        aeropuertoResponse.setCodigoAeropuerto("PAR");
-        aeropuertoResponse.setPais("FR");
-        List<AeropuertoResponse> listaAeropuertos=new ArrayList<>();
-        listaAeropuertos.add(aeropuertoResponse);
-        return listaAeropuertos;
+        return webClient.get().uri( uriBuilder ->
+                uriBuilder.path("/v1/reference-data/locations")
+                        .queryParam("subType", "AIRPORT")
+                        .queryParam("keyword", nombreCiudad)
+                        .build())
+                .headers(httpHeaders -> httpHeaders.setBearerAuth(getAccessToken()))
+                .retrieve()
+                .bodyToMono(JsonNode.class)
+                .map(json -> {
+                    List<AeropuertoResponse> listaRespuesta= new ArrayList<>();
+                     for(JsonNode jsonNode : json.withArrayProperty("data")){
+                        AeropuertoResponse aeropuertoResponse=new AeropuertoResponse();
+                        String codidoPais= jsonNode.get("address").get("countryCode").asText();
+                        String codigoAeropuerto= jsonNode.get("iataCode").asText();
+                        aeropuertoResponse.setPais(codidoPais);
+                        aeropuertoResponse.setCodigoAeropuerto(codigoAeropuerto);
+                        listaRespuesta.add(aeropuertoResponse);
+                    }
+                    return listaRespuesta;
+                    })
+                .block();
     }
 
 }
