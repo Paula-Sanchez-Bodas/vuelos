@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface VueloServicio {
 
+    String getAccessToken();
+
     List<VueloResponse> buscarVuelos(String origen, String destino, Date fechaIda, Date fechaVuelta);
     List<AeropuertoResponse> buscarAeropuertos(String nombreCiudad);
 
