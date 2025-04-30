@@ -1,8 +1,7 @@
 package edu.comillas.icai.gitt.pat.spring.may24.vuelos.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.AeropuertoResponse;
-import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.VueloResponse;
+import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -42,11 +41,36 @@ public class VueloServicioImplementacion implements VueloServicio{
     }
 
     @Override
-    public List<VueloResponse> buscarVuelos(String origen, String destino, Date fechaIda, Date fechaVuelta) {
-        VueloResponse vueloResponse= new VueloResponse();
-        List<VueloResponse> listaVuelos= new ArrayList<>();
-        listaVuelos.add(vueloResponse);
-        return listaVuelos;
+    public VueloResponse buscarVuelos(String origen, String destino, String fechaIda, String fechaVuelta) {
+        return webClient.get().uri( uriBuilder ->
+                        uriBuilder.path("/v2/shopping/flight-offers")
+                                .queryParam("originLocationCode", origen)
+                                .queryParam("destinationLocationCode", destino)
+                                .queryParam("departureDate", fechaIda)
+                                .queryParam("returnDate", fechaVuelta)
+                                .queryParam("adults", "1")
+                                .queryParam("max", "5")
+                                .build())
+                .headers(httpHeaders -> httpHeaders.setBearerAuth(getAccessToken()))
+                .retrieve()
+                .bodyToMono(JsonNode.class)
+                .map(json -> {
+                    VueloResponse vueloResponse=new VueloResponse();
+                    List<OfertaResponse> ofertasResponse = new ArrayList<>();
+
+                    for(JsonNode jsonNode : json.withArrayProperty("data")){
+                        OfertaResponse ofertaResponse= new OfertaResponse();
+                        List<ItinerarioResponse> itinerarios = retrieveItinerarios(jsonNode);
+                        ofertaResponse.setItinerarioIda(itinerarios.get(0));
+                        ofertaResponse.setItinerarioVuelta(itinerarios.get(1));
+                        double precio = jsonNode.get("price").get("total").asDouble();
+                        ofertaResponse.setPrecio(precio);
+                        ofertasResponse.add(ofertaResponse);
+                    }
+                    vueloResponse.setListaOfertas(ofertasResponse);
+                    return vueloResponse;
+                })
+                .block();
     }
 
     @Override
@@ -72,6 +96,27 @@ public class VueloServicioImplementacion implements VueloServicio{
                     return listaRespuesta;
                     })
                 .block();
+    }
+
+    private List<ItinerarioResponse> retrieveItinerarios(JsonNode jsonNode) {
+        JsonNode itinerarios= jsonNode.withArrayProperty("itineraries");
+        List<ItinerarioResponse> listaItinerarios=new ArrayList<>();
+        for(JsonNode jsonNodeItinerario: itinerarios){
+            ItinerarioResponse itinerarioResponse=new ItinerarioResponse();
+            JsonNode seguimientos= jsonNodeItinerario.withArrayProperty("segments");
+            List<SeguimientoResponse> listaSeguimientos= new ArrayList<>();
+            for(JsonNode jsonNodeSeguimiento: seguimientos){
+                SeguimientoResponse seguimientoResponse2= new SeguimientoResponse();
+                seguimientoResponse2.setOrigen(jsonNodeSeguimiento.get("departure").get("iataCode").asText());
+                seguimientoResponse2.setDestino(jsonNodeSeguimiento.get("arrival").get("iataCode").asText());
+                seguimientoResponse2.setFechaSalida(jsonNodeSeguimiento.get("departure").get("at").asText());
+                seguimientoResponse2.setFechaRegreso(jsonNodeSeguimiento.get("arrival").get("at").asText());
+                listaSeguimientos.add(seguimientoResponse2);
+            }
+            itinerarioResponse.setListaSeguimientos(listaSeguimientos);
+            listaItinerarios.add(itinerarioResponse);
+        }
+        return listaItinerarios;
     }
 
 }

@@ -1,12 +1,11 @@
 package edu.comillas.icai.gitt.pat.spring.may24.vuelos.response;
 
-import java.util.Date;
 
 public class SeguimientoResponse {
     private String origen;
     private String destino;
-    private Date fechaSalida;
-    private Date fechaRegreso;
+    private String fechaSalida;
+    private String fechaRegreso;
 
     public String getOrigen() {
         return origen;
@@ -24,19 +23,19 @@ public class SeguimientoResponse {
         this.destino = destino;
     }
 
-    public Date getFechaSalida() {
+    public String getFechaSalida() {
         return fechaSalida;
     }
 
-    public void setFechaSalida(Date fechaSalida) {
+    public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 
-    public Date getFechaRegreso() {
+    public String getFechaRegreso() {
         return fechaRegreso;
     }
 
-    public void setFechaRegreso(Date fechaRegreso) {
+    public void setFechaRegreso(String fechaRegreso) {
         this.fechaRegreso = fechaRegreso;
     }
 }

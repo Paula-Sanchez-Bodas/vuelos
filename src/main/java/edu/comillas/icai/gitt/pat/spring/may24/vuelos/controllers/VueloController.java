@@ -17,10 +17,10 @@ public class VueloController {
 
 
     @GetMapping("/vuelos")
-    List<VueloResponse> getVuelos(@RequestParam String origen,
+    VueloResponse getVuelos(@RequestParam String origen,
                                   @RequestParam String destino,
-                                  @RequestParam Date fechaIda,
-                                  @RequestParam(required = false) Date fechaVuelta){
+                                  @RequestParam String fechaIda,
+                                  @RequestParam(required = false) String fechaVuelta){
         return vueloServicio.buscarVuelos(origen, destino, fechaIda, fechaVuelta);
 
     }

@@ -4,7 +4,7 @@ public class OfertaResponse {
 
     private ItinerarioResponse itinerarioIda;
     private ItinerarioResponse itinerarioVuelta;
-    private float precio;
+    private double precio;
     public ItinerarioResponse getItinerarioIda() {
         return itinerarioIda;
     }
@@ -21,11 +21,11 @@ public class OfertaResponse {
         this.itinerarioVuelta = itinerarioVuelta;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 }
