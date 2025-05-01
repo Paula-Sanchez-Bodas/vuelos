@@ -36,6 +36,9 @@ public class VueloController {
         return vueloServicio.reservar(datosReserva);
     }
 
-
+    @GetMapping("/reservas")
+    List<ReservaEntity> reservasUsuario(@RequestParam(required = true) String usuario){
+        return vueloServicio.buscarReservas(usuario);
+    }
 
 }

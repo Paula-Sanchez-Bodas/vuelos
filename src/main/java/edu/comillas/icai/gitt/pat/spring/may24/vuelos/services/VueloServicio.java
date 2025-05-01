@@ -14,5 +14,5 @@ public interface VueloServicio {
 
     ReservaEntity reservar(ReservaEntity reservaRequest);
 
-
+    List<ReservaEntity> buscarReservas(String usuario);
 }

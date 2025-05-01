@@ -3,14 +3,15 @@ package edu.comillas.icai.gitt.pat.spring.may24.vuelos.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class ReservaEntity {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private double precio;
     private String origen;
     private String destino;
@@ -18,11 +19,11 @@ public class ReservaEntity {
     private String fechaRegreso;
     private String usuario;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

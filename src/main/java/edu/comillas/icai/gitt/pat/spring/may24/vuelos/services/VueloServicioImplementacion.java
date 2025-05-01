@@ -105,6 +105,11 @@ public class VueloServicioImplementacion implements VueloServicio{
         return reservaRepo.save(reservaRequest);
     }
 
+    @Override
+    public List<ReservaEntity> buscarReservas(String usuario) {
+        return reservaRepo.findByUsuario(usuario);
+    }
+
     private List<ItinerarioResponse> retrieveItinerarios(JsonNode jsonNode) {
         JsonNode itinerarios= jsonNode.withArrayProperty("itineraries");
         List<ItinerarioResponse> listaItinerarios=new ArrayList<>();
