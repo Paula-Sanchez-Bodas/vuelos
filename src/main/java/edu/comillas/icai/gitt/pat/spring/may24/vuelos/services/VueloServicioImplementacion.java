@@ -1,19 +1,21 @@
 package edu.comillas.icai.gitt.pat.spring.may24.vuelos.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import edu.comillas.icai.gitt.pat.spring.may24.vuelos.entity.ReservaEntity;
+import edu.comillas.icai.gitt.pat.spring.may24.vuelos.repositories.ReservaRepo;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class VueloServicioImplementacion implements VueloServicio{
-
+    @Autowired  ReservaRepo reservaRepo;
     @Value("${vuelos.client_id}")
     private String client_id;
 
@@ -96,6 +98,11 @@ public class VueloServicioImplementacion implements VueloServicio{
                     return listaRespuesta;
                     })
                 .block();
+    }
+
+    @Override
+    public ReservaEntity reservar(ReservaEntity reservaRequest) {
+        return reservaRepo.save(reservaRequest);
     }
 
     private List<ItinerarioResponse> retrieveItinerarios(JsonNode jsonNode) {

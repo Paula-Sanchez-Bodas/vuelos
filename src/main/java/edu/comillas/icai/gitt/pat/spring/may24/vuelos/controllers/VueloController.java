@@ -1,13 +1,13 @@
 package edu.comillas.icai.gitt.pat.spring.may24.vuelos.controllers;
 
+import edu.comillas.icai.gitt.pat.spring.may24.vuelos.entity.ReservaEntity;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.AeropuertoResponse;
-import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.OfertaResponse;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.VueloResponse;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.services.VueloServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,8 +31,9 @@ public class VueloController {
     }
 
     @PostMapping("/reservas")
-    void postReserva(@RequestBody String datosReserva){
-
+    @ResponseStatus(HttpStatus.CREATED)
+    ReservaEntity postReserva(@RequestBody ReservaEntity datosReserva){
+        return vueloServicio.reservar(datosReserva);
     }
 
 
