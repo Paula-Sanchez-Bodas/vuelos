@@ -1,0 +1,20 @@
+2025-05-20 15:31:21.866175+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+SELECT * FROM Users [42102-232]
+2025-05-20 15:31:27.223411+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "URESERVA_ENTITY" no encontrada
+Table "URESERVA_ENTITY" not found; SQL statement:
+SELECT * FROM URESERVA_ENTITY [42102-232]
+2025-05-20 15:31:27.705521+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "URESERVA_ENTITY" no encontrada
+Table "URESERVA_ENTITY" not found; SQL statement:
+SELECT * FROM URESERVA_ENTITY [42102-232]
+2025-05-20 17:28:02.934586+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM RESERVA_ENTITY WHERE USUARIO = nacho"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM RESERVA_ENTITY WHERE USUARIO = nacho"; expected "identifier"; SQL statement:
+DELETE * FROM RESERVA_ENTITY WHERE USUARIO = nacho [42001-232]
+2025-05-20 17:28:08.591399+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM RESERVA_ENTITY WHERE USUARIO = :nacho"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM RESERVA_ENTITY WHERE USUARIO = :nacho"; expected "identifier"; SQL statement:
+DELETE * FROM RESERVA_ENTITY WHERE USUARIO = :nacho [42001-232]
