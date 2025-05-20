@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Si quieres hacer cosas extra en index.html, puedes añadir aquí lógica separada
 });
 
 
@@ -117,9 +116,7 @@ document.getElementById("search-form").addEventListener("submit", function(event
 });
 
 function mostrarVuelos(data) {
-    // Aquí creas dinámicamente el HTML para mostrar los vuelos
-    // Por ejemplo, podrías tener un div en tu HTML:
-    // <div id="resultados-vuelos"></div>
+    // Se crea dinámicamente el HTML para mostrar los vuelos
 
     const contenedor = document.getElementById("resultados-vuelos");
     contenedor.innerHTML = ""; // Limpia resultados previos
@@ -221,7 +218,7 @@ function mostrarVuelos(data) {
 }
 
 function reservarVuelo(datosReserva) {
-    // Aquí deberías preguntar al usuario el nombre para la reserva (o tomarlo de un login)
+
     const usuario = prompt("Por favor, introduce tu nombre de usuario para la reserva:");
 
     if (!usuario) {
