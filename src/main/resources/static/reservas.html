@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mis Reservas</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+    <h1>Reservas del Usuario</h1>
+</header>
+
+<main>
+    <section class="reservas-section">
+        <h2>Reservas para: <span id="nombre-usuario">Usuario</span></h2>
+
+        <!-- Ejemplo de reserva (esto será dinámico en el futuro con JS) -->
+        <div class="reserva-card">
+            <p><strong>Usuario:</strong> Lucas</p>
+            <p><strong>Origen:</strong> MAD</p>
+            <p><strong>Destino:</strong> SAN</p>
+            <p><strong>Salida:</strong> 2026-11-03</p>
+            <p><strong>Regreso:</strong> 2026-11-18</p>
+            <p><strong>Precio:</strong> 798 €</p>
+        </div>
+
+        <!-- Más reservas aquí... -->
+    </section>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="index.html"><button>Volver a la búsqueda</button></a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Buscador de Vuelos</p>
+</footer>
+
+<script>
+    // Script para mostrar el nombre del usuario desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const usuario = params.get("usuario");
+    if (usuario) {
+        document.getElementById("nombre-usuario").textContent = usuario;
+    }
+</script>
+<script src="js/reservas.js"></script>
+</body>
+</html>
