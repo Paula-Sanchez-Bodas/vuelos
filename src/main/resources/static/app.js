@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (spanUsuario && usuario) {
         spanUsuario.textContent = usuario;
 
-        fetch(`http://localhost:8080/reservas?usuario=${usuario}`)
+        fetch(`https://vuelos-o4t6.onrender.com/reservas?usuario=${usuario}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error en la respuesta: ${response.status}`);
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!ciudad) return;
 
-        fetch(`http://localhost:8080/aeropuertos?nombreCiudad=${ciudad}`)
+        fetch(`https://vuelos-o4t6.onrender.com/aeropuertos?nombreCiudad=${ciudad}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Error al obtener aeropuertos");
@@ -96,7 +96,7 @@ document.getElementById("search-form").addEventListener("submit", function(event
     const fechaIda = document.getElementById("fechaIda").value;
     const fechaVuelta = document.getElementById("fechaVuelta").value;
 
-    let url = `http://localhost:8080/vuelos?origen=${encodeURIComponent(origen)}&destino=${encodeURIComponent(destino)}&fechaIda=${fechaIda}`;
+    let url = `https://vuelos-o4t6.onrender.com/vuelos?origen=${encodeURIComponent(origen)}&destino=${encodeURIComponent(destino)}&fechaIda=${fechaIda}`;
     if(fechaVuelta) {
         url += `&fechaVuelta=${fechaVuelta}`;
     }
@@ -150,7 +150,7 @@ document.getElementById("search-form").addEventListener("submit", function(event
     const fechaIda = document.getElementById("fechaIda").value;
     const fechaVuelta = document.getElementById("fechaVuelta").value;
 
-    let url = `http://localhost:8080/vuelos?origen=${encodeURIComponent(origen)}&destino=${encodeURIComponent(destino)}&fechaIda=${fechaIda}`;
+    let url = `https://vuelos-o4t6.onrender.com/vuelos?origen=${encodeURIComponent(origen)}&destino=${encodeURIComponent(destino)}&fechaIda=${fechaIda}`;
     if (fechaVuelta) {
         url += `&fechaVuelta=${fechaVuelta}`;
     }
@@ -228,7 +228,7 @@ function reservarVuelo(datosReserva) {
 
     datosReserva.usuario = usuario;
 
-    fetch("http://localhost:8080/reservas", {
+    fetch("https://vuelos-o4t6.onrender.com/reservas", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

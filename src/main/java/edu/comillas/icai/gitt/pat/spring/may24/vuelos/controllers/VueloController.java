@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:63342") // <--- AQUÍ
+@CrossOrigin(origins = "*")
 public class VueloController {
 
     @Autowired VueloServicio vueloServicio;
