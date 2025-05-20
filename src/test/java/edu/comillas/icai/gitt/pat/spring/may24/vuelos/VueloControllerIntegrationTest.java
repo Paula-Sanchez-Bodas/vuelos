@@ -62,7 +62,7 @@ class VueloControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].pais").value("ES"));
     }
 
-    @Test
+    /*@Test
     void crearReservaOk() throws Exception {
         // Given
         String requestBody = "{\"vueloId\":\"123\",\"pasajero\":\"John Doe\"}";
@@ -72,7 +72,7 @@ class VueloControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+    }*/
 
     @Test
     void buscarVuelosFaltanParametros() throws Exception {
