@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserva de Vuelos</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>BUSCADOR DE VUELOS</h1>
+</header>
+
+<main>
+  <!-- Buscar vuelos -->
+  <section class="search-section">
+    <h2>Buscar vuelos</h2>
+    <form id="search-form">
+      <div class="form-group">
+        <label for="origen">Origen:</label>
+        <input type="text" id="origen" name="origen" placeholder="Ej: MAD" required>
+      </div>
+      <div class="form-group">
+        <label for="destino">Destino:</label>
+        <input type="text" id="destino" name="destino" placeholder="Ej: JFK" required>
+      </div>
+      <div class="form-group">
+        <label for="fechaIda">Fecha de ida:</label>
+        <input type="date" id="fechaIda" name="fechaIda" required>
+      </div>
+      <div class="form-group">
+        <label for="fechaVuelta">Fecha de vuelta:</label>
+        <input type="date" id="fechaVuelta" name="fechaVuelta">
+      </div>
+      <button type="submit">Buscar</button>
+      <div id="resultados-vuelos" style="margin-top: 20px;"></div>
+    </form>
+  </section>
+
+  <!-- Buscar aeropuertos -->
+  <section class="airport-section">
+    <h2>Buscar aeropuertos por ciudad</h2>
+    <form id="airport-form">
+      <div class="form-group">
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Madrid" required />
+      </div>
+      <button type="submit">Buscar</button>
+
+
+    </form>
+
+
+
+
+    <!-- Resultados de aeropuertos -->
+    <div class="airport-results">
+      <div class="airport-card">
+        <p><strong>Aeropuerto:</strong> MAD</p>
+        <p><strong>País:</strong> España</p>
+      </div>
+      <!-- Más resultados aquí -->
+    </div>
+  </section>
+
+  <!-- Al final del <main>, antes de </main> -->
+  <section class="usuario-section">
+    <h2>Consultar mis reservas</h2>
+    <form action="reservas.html" method="GET">
+      <div class="form-group">
+        <label for="usuario">Nombre del usuario:</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Ej: Lucas" required />
+      </div>
+      <button type="submit">Ver mis reservas</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 Buscador de Vuelos</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
 
