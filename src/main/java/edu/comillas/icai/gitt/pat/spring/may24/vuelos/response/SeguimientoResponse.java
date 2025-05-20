@@ -1,10 +1,16 @@
 package edu.comillas.icai.gitt.pat.spring.may24.vuelos.response;
 
 
+import jakarta.validation.constraints.NotBlank;
+
 public class SeguimientoResponse {
+    @NotBlank
     private String origen;
+    @NotBlank
     private String destino;
+    @NotBlank
     private String fechaSalida;
+    @NotBlank
     private String fechaRegreso;
 
     public String getOrigen() {

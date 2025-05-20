@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ReservaEntity {
@@ -12,11 +15,24 @@ public class ReservaEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    @Min(0)
     private double precio;
+
+    @NotNull
+    @NotBlank
     private String origen;
+    @NotNull
+    @NotBlank
     private String destino;
+    @NotNull
+    @NotBlank
     private String fechaSalida;
+    @NotNull
+    @NotBlank
     private String fechaRegreso;
+    @NotNull
+    @NotBlank
     private String usuario;
 
     public Long getId() {

@@ -4,6 +4,7 @@ import edu.comillas.icai.gitt.pat.spring.may24.vuelos.entity.ReservaEntity;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.AeropuertoResponse;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.response.VueloResponse;
 import edu.comillas.icai.gitt.pat.spring.may24.vuelos.services.VueloServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class VueloController {
 
     @PostMapping("/reservas")
     @ResponseStatus(HttpStatus.CREATED)
-    ReservaEntity postReserva(@RequestBody ReservaEntity datosReserva){
+    ReservaEntity postReserva(@RequestBody @Valid ReservaEntity datosReserva){
         return vueloServicio.reservar(datosReserva);
     }
 
