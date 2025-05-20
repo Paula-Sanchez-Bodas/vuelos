@@ -1,11 +1,11 @@
-# Usar una imagen base con Java
-FROM openjdk:17-jdk-alpine
+# Etapa 1: Build con Maven
+FROM maven:3.8.5-eclipse-temurin-17 AS builder
+WORKDIR /app
+COPY . .
+RUN mvn clean package
 
-# Copiar el JAR generado al contenedor
-COPY target/vuelo-0.0.1-SNAPSHOT.jar app.jar
-
-# Exponer el puerto que usa Spring Boot (por defecto 8080)
-EXPOSE 8080
-
-# Ejecutar la app
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Etapa 2: Ejecutar el .jar generado
+FROM eclipse-temurin:17
+WORKDIR /app
+COPY --from=builder /app/target/vuelo-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
